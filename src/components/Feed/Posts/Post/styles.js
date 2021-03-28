@@ -2,17 +2,17 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     paper: {
-        padding: theme.spacing(4),
+        padding: theme.spacing(4)
     },
-    form: {
+    card: {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
         border: '1px solid #ace8bc',
-        padding: theme.spacing(2)
+        padding: theme.spacing(1)
     },
-    fileInput: {
-        width: '97%',
-        margin: '10px 0',
+    image: {
+        width: '100%',
+        height: 'auto'
     }
 }));

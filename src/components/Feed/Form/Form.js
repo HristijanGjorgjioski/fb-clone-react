@@ -15,7 +15,7 @@ const Form = () => {
 
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        console.log(postData);
+        // console.log(postData);
         clear();
     }
 
