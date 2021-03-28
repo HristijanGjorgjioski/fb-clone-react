@@ -15,7 +15,9 @@ export default makeStyles(() => ({
         color: 'rgba(0,183,255, 1)'
     },
     logout: {
-        padding: '15px',
-        marginRight: '15px'
+        marginRight: '3%',
+    },
+    text: {
+        textDecoration: 'none',
     }
 }))
