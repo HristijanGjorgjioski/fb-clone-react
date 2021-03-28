@@ -6,8 +6,8 @@ import useStyles from './styles';
 
 const Sidebar = () => {
     const classes = useStyles();
-    const [text, setText] = useState('Never give up on your dreams!');
-    const [image, setImage] = useState('');
+    const [text, setText] = useState({ text: 'Never give up on your dreams!' });
+    const [image, setImage] = useState('https://source.unsplash.com/random');
 
     const onButtonClick = async () => {
         const url = 'https://type.fit/api/quotes';
@@ -23,7 +23,7 @@ const Sidebar = () => {
             <Card className={classes.card}>
                 <CardActionArea>
                     <CardMedia component="img" alt="Fact Image" height="140" title="Fact Image" image={image} />
-                    <CardContent textAlign="center">
+                    <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">QUOTE</Typography>
                         <Typography variant="subtitle1" component="p">
                             {text.text}

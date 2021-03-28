@@ -9,8 +9,14 @@ const Form = () => {
     const classes = useStyles()
     const [postData, setPostData] = useState({ description: '', selectedFile: '' });
 
-    const onFormSubmit = () => {
-        
+    const clear = () => {
+        setPostData({ description: '', selectedFile: '' })
+    }
+
+    const onFormSubmit = async (e) => {
+        e.preventDefault();
+        console.log(postData);
+        clear();
     }
 
     return (
@@ -19,7 +25,7 @@ const Form = () => {
                 <Typography variant="h6">Create a Post</Typography>
                 <TextField name="description" variant="outlined" label="Description" fullWidth multiline rows={4} onChange={(e) => setPostData({ ...postData, description: e.target.value})} />
                 <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
-                <Button className={classes.button} variant="contained" color="primary" size="large" type="submit">Submit</Button>
+                <Button variant="contained" color="primary" size="large" type="submit">Submit</Button>
             </form>
         </Paper>
     )
