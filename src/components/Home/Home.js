@@ -22,7 +22,7 @@ const Home = () => {
                     <Grid className={classes.desktop} item sm={3} xs={6} style={{border: '1px solid black'}}>
                         <Search />
                     </Grid>
-                    <Grid style={{border: '1px solid black'}} item xs={12} sm={6}>
+                    <Grid item xs={12} sm={6}>
                         <Feed />
                     </Grid>
                     <Grid className={classes.mobile} item sm={3} xs={6} style={{border: '1px solid black'}}>

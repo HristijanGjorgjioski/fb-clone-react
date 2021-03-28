@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+
+import Form from './Form/Form.js';
 
 const Feed = () => {
     return (
         <div>
-            Feed!
+            <Form />
         </div>
     )
 }
