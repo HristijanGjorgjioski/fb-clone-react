@@ -1,31 +1,21 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
+import contextReducer from './contextReducer';
 
-const AuthStateContext = createContext();
-const AuthDispatchContext = createContext();
+const initialState = [];
 
-// Helper function
-export const useAuthState = () => {
-    const context = useContext(AuthStateContext);
-    if(context === undefined) throw new Error("useAuthState must be used within a AuthProvider");
-    return context;
-};
-
-// Helper function
-export const useAuthDispatch = () => {
-    const context = useContext(AuthDispatchContext);
-    if(context === undefined) throw new Error("useAuthDispatch must be used within a AuthProvider");
-    return context;
-};
+export const UserContext = createContext(initialState);
 
 // Main Provider
 export const Provider = ({ children }) => {
-    // const [user, dispatch] = useReducer(AuthReducer, initialState);
+    const [users, dispatch] = useReducer(contextReducer, initialState);
 
-    // return (
-    //     <AuthStateContext.Provider value={user}>
-    //         <AuthDispatchContext.Provider value={dispatch}>
-    //             {children}
-    //         </AuthDispatchContext.Provider>
-    //     </AuthStateContext.Provider>
-    // );
+    const createUser = (user) => dispatch({ type: 'CREATE_USER', payload: user });
+
+    return (
+        <UserContext.Provider value={{
+            createUser
+        }}>
+            {children}
+        </UserContext.Provider>
+    );
 };

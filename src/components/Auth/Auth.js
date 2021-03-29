@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
+import { UserContext } from '../../context/context';
 import useStyles from './styles';
 import Input from './Input';
 
@@ -11,6 +12,7 @@ const Auth = () => {
     const classes = useStyles();
     const [form, setForm] = useState(initialState);
     const [isSignup, setIsSignup] = useState(false);
+    const { createUser } = useContext(UserContext);
 
     const [showPassword, setShowPassword] = useState(false);
     const handleShowPassword = () => setShowPassword(!showPassword);
@@ -23,6 +25,14 @@ const Auth = () => {
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
+    const onFormSubmit = (e) => {
+        e.preventDefault();
+
+        const user = form;
+        createUser(user);
+        setForm(initialState);
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
@@ -30,7 +40,7 @@ const Auth = () => {
                 <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
-                <form className={classes.form}>
+                <form className={classes.form} onSubmit={onFormSubmit}>
                 <Grid container spacing={2}>
                     { isSignup && (
                     <>
