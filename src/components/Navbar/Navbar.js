@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Button, AppBar, Toolbar, Typography, MenuItem } from '@material-ui/core';
-import { Person, Home, ExitToApp } from '@material-ui/icons';
+import { Box, Button, AppBar, Toolbar, MenuItem } from '@material-ui/core';
+import { Person, Home } from '@material-ui/icons';
 
 import useStyles from './styles';
 
