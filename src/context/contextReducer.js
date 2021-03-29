@@ -5,9 +5,9 @@ const contextReducer = (state, action) => {
 
     switch (action.type) {
         case 'CREATE_USER':
-            user = [action.payload, ...state];
+            user = [action.payload];
             localStorage.setItem('user', JSON.stringify(user));
-            const createdUser = api.register(user);
+            const { createdUser } = api.register(user);
             return createdUser;
         default:
             return state;
