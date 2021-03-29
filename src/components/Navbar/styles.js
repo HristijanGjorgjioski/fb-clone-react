@@ -19,5 +19,8 @@ export default makeStyles(() => ({
     },
     text: {
         textDecoration: 'none',
+    },
+    email: {
+        marginRight: '3%'
     }
 }))

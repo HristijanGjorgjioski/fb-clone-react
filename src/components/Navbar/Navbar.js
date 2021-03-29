@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Button, AppBar, Toolbar, MenuItem } from '@material-ui/core';
+import { Box, Button, AppBar, Toolbar, MenuItem, Typography } from '@material-ui/core';
 import { Person, Home } from '@material-ui/icons';
 
 import useStyles from './styles';
 
 const Navbar = () => {
     const classes = useStyles();
+    const user = JSON.parse(localStorage.getItem('user'));
 
     return (
         <AppBar position="static" className={classes.appBar}>
@@ -15,7 +16,14 @@ const Navbar = () => {
                     <MenuItem component={Link} to="/" className={classes.menuItem}><Home className={classes.icon} /></MenuItem>
                     <MenuItem component={Link} to="/profile:id" className={classes.menuItem}><Person className={classes.icon} /></MenuItem>
                 </Box>
-                <Button component={Link} to="/logout" variant="contained" color="secondary" className={classes.logout}>Logout</Button>
+                { user ? 
+                    <>
+                    <Typography className={classes.email} variant="h6" color="textSecondary">{user[0].email}</Typography>
+                    <Button component={Link} to="/auth" variant="contained" color="secondary" className={classes.logout}>Logout</Button>
+                    </>
+                : 
+                    <Button component={Link} to="/auth" variant="contained" color="primary" className={classes.logout}>Signin</Button> 
+                }
             </Toolbar>
         </AppBar>
     );
