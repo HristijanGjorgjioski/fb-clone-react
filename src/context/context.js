@@ -19,12 +19,16 @@ export const Provider = ({ children }) => {
         router.push('/');
     };
 
-    // const getUser = dispatch({ type: 'GET_USER' });
+    const logout = (router) => {
+        dispatch({ type: 'LOGOUT' });
+        router.push('/');
+    }
 
     return (
         <UserContext.Provider value={{
             createUser,
             loginUser,
+            logout
         }}>
             {children}
         </UserContext.Provider>
