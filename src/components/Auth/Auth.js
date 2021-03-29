@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { useHistory } from 'react-router-dom';
 
 import { UserContext } from '../../context/context';
 import useStyles from './styles';
@@ -12,7 +13,8 @@ const Auth = () => {
     const classes = useStyles();
     const [form, setForm] = useState(initialState);
     const [isSignup, setIsSignup] = useState(false);
-    const { createUser } = useContext(UserContext);
+    const { createUser, loginUser } = useContext(UserContext);
+    const history = useHistory();
 
     const [showPassword, setShowPassword] = useState(false);
     const handleShowPassword = () => setShowPassword(!showPassword);
@@ -27,9 +29,13 @@ const Auth = () => {
 
     const onFormSubmit = (e) => {
         e.preventDefault();
-
         const user = form;
-        createUser(user);
+
+        isSignup ? 
+            createUser(user, history)
+        : 
+            loginUser(user, history);
+
         setForm(initialState);
     }
 

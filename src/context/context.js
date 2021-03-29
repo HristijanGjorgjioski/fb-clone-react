@@ -9,11 +9,20 @@ export const UserContext = createContext(initialState);
 export const Provider = ({ children }) => {
     const [users, dispatch] = useReducer(contextReducer, initialState);
 
-    const createUser = (user) => dispatch({ type: 'CREATE_USER', payload: user });
+    const createUser = (user, router) => {
+        dispatch({ type: 'CREATE_USER', payload: user });
+        router.push('/');
+    };
+
+    const loginUser = (user, router) => {
+        dispatch({ type: 'LOGIN_USER', payload: user });
+        router.push('/');
+    };
 
     return (
         <UserContext.Provider value={{
-            createUser
+            createUser,
+            loginUser
         }}>
             {children}
         </UserContext.Provider>
