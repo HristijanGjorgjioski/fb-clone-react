@@ -3,7 +3,7 @@ import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useHistory } from 'react-router-dom';
 
-import { UserContext } from '../../context/context';
+import { MainContext } from '../../context/context';
 import useStyles from './styles';
 import Input from './Input';
 
@@ -13,7 +13,7 @@ const Auth = () => {
     const classes = useStyles();
     const [form, setForm] = useState(initialState);
     const [isSignup, setIsSignup] = useState(false);
-    const { createUser, loginUser } = useContext(UserContext);
+    const { createUser, loginUser } = useContext(MainContext);
     const history = useHistory();
 
     const [showPassword, setShowPassword] = useState(false);

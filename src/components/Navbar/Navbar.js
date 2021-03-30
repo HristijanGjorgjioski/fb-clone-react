@@ -5,12 +5,12 @@ import { Person, Home } from '@material-ui/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import decode from 'jwt-decode';
 
-import { UserContext } from '../../context/context';
+import { MainContext } from '../../context/context';
 import useStyles from './styles';
 const Navbar = () => {
     const classes = useStyles();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
-    const { logout } = useContext(UserContext);
+    const { logout } = useContext(MainContext);
     const history = useHistory();
     const location = useLocation();
 

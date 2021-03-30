@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import FileBase from 'react-file-base64';
 import { Paper, TextField, Typography, Button } from '@material-ui/core';
-import { UserContext } from '../../../context/context';
+import { MainContext } from '../../../context/context';
 
 import useStyles from './styles';
 
 const Form = () => {
     const classes = useStyles()
     const [postData, setPostData] = useState({ description: '', selectedFile: '' });
-    const { createPost } = useContext(UserContext);
+    const { createPost } = useContext(MainContext);
     const user = JSON.parse(localStorage.getItem('user'));
 
     const clear = () => {
