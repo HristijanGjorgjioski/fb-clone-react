@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import contextReducer from './contextReducer';
+import * as api from '../api/index';
 
 const initialState = [];
 
@@ -9,13 +10,16 @@ export const UserContext = createContext(initialState);
 export const Provider = ({ children }) => {
     const [users, dispatch] = useReducer(contextReducer, initialState);
 
-    const createUser = (user, router) => {
-        dispatch({ type: 'CREATE_USER', payload: user });
+    const createUser = async (user, router) => {
+        const createdUser = await api.register(user);
+        console.log(createdUser, 'createdUseeer')
+        dispatch({ type: 'CREATE_USER', data: createdUser });
         router.push('/');
     };
 
-    const loginUser = (user, router) => {
-        dispatch({ type: 'LOGIN_USER', payload: user });
+    const loginUser = async (user, router) => {
+        const { loggedUser } = await api.signin(user);
+        dispatch({ type: 'LOGIN_USER', data: loggedUser });
         router.push('/');
     };
 
