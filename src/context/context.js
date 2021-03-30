@@ -12,14 +12,13 @@ export const Provider = ({ children }) => {
 
     const createUser = async (user, router) => {
         const createdUser = await api.register(user);
-        console.log(createdUser, 'createdUseeer')
-        dispatch({ type: 'CREATE_USER', data: createdUser });
+        dispatch({ type: 'AUTH', data: createdUser });
         router.push('/');
     };
 
     const loginUser = async (user, router) => {
-        const { loggedUser } = await api.signin(user);
-        dispatch({ type: 'LOGIN_USER', data: loggedUser });
+        const loggedUser = await api.signin(user);
+        dispatch({ type: 'AUTH', data: loggedUser });
         router.push('/');
     };
 

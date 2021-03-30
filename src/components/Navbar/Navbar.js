@@ -19,7 +19,7 @@ const Navbar = () => {
     }
 
     useEffect(() => {
-        const token = user?.token
+        const token = user?.data?.token;
 
         if(token) {
             const decodedToken = decode(token);
@@ -37,9 +37,9 @@ const Navbar = () => {
                     <MenuItem component={Link} to="/" className={classes.menuItem}><Home className={classes.icon} /></MenuItem>
                     <MenuItem component={Link} to="/profile:id" className={classes.menuItem}><Person className={classes.icon} /></MenuItem>
                 </Box>
-                { user?.result ? 
+                { user?.data?.result ? 
                     <>
-                    <Typography className={classes.email} variant="h6" color="textSecondary">{user?.result.email}</Typography>
+                    <Typography className={classes.email} variant="h6" color="textSecondary">{user?.data?.result.name}</Typography>
                     <Button component={Link} to="/auth" variant="contained" color="secondary" className={classes.logout} onClick={onLogout}>Logout</Button>
                     </>
                 : 
