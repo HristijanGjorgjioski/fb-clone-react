@@ -1,21 +1,24 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import FileBase from 'react-file-base64';
-
 import { Paper, TextField, Typography, Button } from '@material-ui/core';
+import { UserContext } from '../../../context/context';
 
 import useStyles from './styles';
 
 const Form = () => {
     const classes = useStyles()
     const [postData, setPostData] = useState({ description: '', selectedFile: '' });
+    const { createPost } = useContext(UserContext);
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const clear = () => {
         setPostData({ description: '', selectedFile: '' })
     }
 
+
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        // console.log(postData);
+        createPost({ ...postData, creator: user?.data?.result?.name });
         clear();
     }
 
@@ -31,4 +34,4 @@ const Form = () => {
     )
 }
 
-export default Form
+export default Form;

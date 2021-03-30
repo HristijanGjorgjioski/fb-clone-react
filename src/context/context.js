@@ -25,13 +25,19 @@ export const Provider = ({ children }) => {
     const logout = (router) => {
         dispatch({ type: 'LOGOUT' });
         router.push('/');
-    }
+    };
+
+    const createPost = async (post) => {
+        const createdPost = await api.createPost(post);
+        dispatch({ type: 'CREATE_POST', createdPost });
+    };
 
     return (
         <UserContext.Provider value={{
             createUser,
             loginUser,
-            logout
+            logout,
+            createPost
         }}>
             {children}
         </UserContext.Provider>
