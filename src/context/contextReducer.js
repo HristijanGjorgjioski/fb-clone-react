@@ -1,6 +1,6 @@
 import * as api from '../api/index';
 
-const contextReducer = (state, action) => {
+const contextReducer = (state = { authData: null }, action) => {
     let user;
     let exsistUser;
 
@@ -9,10 +9,10 @@ const contextReducer = (state, action) => {
             user = [action.payload];
             localStorage.setItem('user', JSON.stringify(user));
             const { createdUser } = api.register(user);
-            return createdUser;
+            return { createdUser, authData: action.data, loading: false, errors: null };
         case 'LOGIN_USER':
             exsistUser = [action.payload];
-            localStorage.setItem('user', JSON.stringify(exsistUser));
+            localStorage.setItem('user', JSON.stringify({ ...action?.data }));
             const { loggedUser } = api.signin(exsistUser);
             return loggedUser;
         case 'LOGOUT':
