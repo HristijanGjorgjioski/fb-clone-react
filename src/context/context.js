@@ -1,15 +1,18 @@
 import React, { createContext, useReducer } from 'react';
-import contextReducer from './contextReducer';
+import userContextReducer from './userContextReducer';
+
 import * as api from '../api/index';
+import postContext from './postContextReducer';
 
 const initialState = [];
+const postsState = [];
 
 export const MainContext = createContext(initialState);
 
 // Main Provider
 export const Provider = ({ children }) => {
-    const [users, dispatch] = useReducer(contextReducer, initialState);
-
+    const [users, dispatch] = useReducer(userContextReducer, initialState);
+    const [posts, dispatchPost] = useReducer(postContext, postsState);
 
     // AUTH ACTIONS
     const createUser = async (user, router) => {
@@ -30,27 +33,25 @@ export const Provider = ({ children }) => {
     };
     // END AUTH
 
-    // POST ACTIONS
-    const getPosts = async () => {
-        try {
-            const posts = await api.getPosts();
-            dispatch({ type: 'GET_POSTS', payload: posts })
-        } catch (error) {
-            console.log(error);
-        }
+    const getPosts = async (req, res) => {
+        const post = await api.getPosts();
+        postsState.push(post);
     }
 
+    // POST ACTIONS
     const createPost = async (post) => {
         const createdPost = await api.createPost(post);
-        dispatch({ type: 'CREATE_POST', createdPost });
+        dispatchPost({ type: 'CREATE_POST', createdPost });
     };
     // END POSTS
 
     return (
         <MainContext.Provider value={{
+            users,
             createUser,
             loginUser,
             logout,
+            getPosts,
             createPost
         }}>
             {children}
