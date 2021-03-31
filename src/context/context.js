@@ -44,8 +44,9 @@ export const Provider = ({ children }) => {
         }
     };
 
-    const createPost = async (post) => {
+    const createPost = async (post, router) => {
         const createdPost = await api.createPost(post);
+        router.push("/");
         dispatchPost({ type: 'CREATE_POST', createdPost });
     };
     // END POSTS

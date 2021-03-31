@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import FileBase from 'react-file-base64';
+import { useHistory } from 'react-router-dom';
 import { Paper, TextField, Typography, Button } from '@material-ui/core';
 import { MainContext } from '../../../context/context';
 
@@ -9,16 +10,16 @@ const Form = () => {
     const classes = useStyles()
     const [postData, setPostData] = useState({ description: '', selectedFile: '' });
     const { createPost } = useContext(MainContext);
+    const history = useHistory();
     const user = JSON.parse(localStorage.getItem('user'));
 
     const clear = () => {
         setPostData({ description: '', selectedFile: '' })
     }
 
-
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        createPost({ ...postData, creator: user?.data?.result?.name });
+        createPost({ ...postData, creator: user?.data?.result?.name }, history);
         clear();
     }
 

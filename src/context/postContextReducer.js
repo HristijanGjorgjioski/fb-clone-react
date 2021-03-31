@@ -5,7 +5,7 @@ const postContext = async (posts=[], action) => {
         case 'CREATE_POST':
             return [...posts, action.payload]
         default:
-            break;
+            return posts;
     }
 }
 

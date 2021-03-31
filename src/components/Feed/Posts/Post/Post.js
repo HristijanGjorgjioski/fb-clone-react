@@ -1,19 +1,40 @@
 import React from 'react'
 import { Card, CardMedia, Paper, Typography } from '@material-ui/core';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import DeleteIcon from '@material-ui/icons/Delete';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 
 import useStyles from './styles';
 
-const Post = ({ post }) => {
+const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
-    console.log(post[0][0].creator)
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    const Likes = () => {
+        if (post.likes.length > 0) {
+          return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+            ? (
+              <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }</>
+            ) : (
+              <><ThumbUpAltOutlined fontSize="small" />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}</>
+            );
+        }
+    
+        return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
+    };
+    
+
     return (
-        <Paper className={classes.paper}>
-            <Card className={classes.card}>
-                <Typography variant="h6" color="textSecondary">Hristijan Gjorgjioski</Typography>
-                <CardMedia className={classes.image} component="img" image={"https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"} title={'Image'} />
-                <Typography variant="h6">Description</Typography>
-            </Card>
-        </Paper>
+        post ? post[0].map((p) => (
+            <Paper key={p._id} className={classes.paper}>
+                <Card className={classes.card}>
+                    <Typography variant="h6" color="textSecondary">{p.creator}</Typography>
+                    <CardMedia className={classes.image} component="img" image={p.photo} title={'Image'} />
+                    <Typography variant="h6">{p.description}</Typography>
+                </Card>
+            </Paper>
+        )) : null
     )
 }
 

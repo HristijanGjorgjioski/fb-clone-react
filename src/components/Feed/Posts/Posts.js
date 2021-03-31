@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react'
+import { CircularProgress } from '@material-ui/core';
+
 import Post from './Post/Post'
-
 import { MainContext } from '../../../context/context';
-import { Button } from '@material-ui/core';
 
-const Posts = () => {
+const Posts = ({ setCurrentId }) => {
     const { postsState, getPosts } = useContext(MainContext);
     
     useEffect(() => {
@@ -12,9 +12,15 @@ const Posts = () => {
     }, []);
 
     return (
-        <div>
-            <Post post={postsState} />
-        </div>
+            !postsState.length ? <CircularProgress /> : (
+                <div>
+                    {postsState.map((post) => (
+                        <div key={post._id}>
+                            <Post key={post._id} post={postsState} setCurrentId={setCurrentId} />
+                        </div>
+                    ))}
+                </div>
+            )
     )
 }
 
