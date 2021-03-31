@@ -33,12 +33,17 @@ export const Provider = ({ children }) => {
     };
     // END AUTH
 
-    const getPosts = async (req, res) => {
-        const post = await api.getPosts();
-        postsState.push(post);
-    }
-
     // POST ACTIONS
+    const getPosts = async () => {
+        try {
+            const { data } = await api.getPosts();
+            postsState.push(data);
+            dispatchPost({ type: 'GET_POSTS', payload: data })
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const createPost = async (post) => {
         const createdPost = await api.createPost(post);
         dispatchPost({ type: 'CREATE_POST', createdPost });
@@ -52,6 +57,7 @@ export const Provider = ({ children }) => {
             loginUser,
             logout,
             getPosts,
+            postsState,
             createPost
         }}>
             {children}

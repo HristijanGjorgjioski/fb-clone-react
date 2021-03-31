@@ -3,9 +3,9 @@ import { Card, CardMedia, Paper, Typography } from '@material-ui/core';
 
 import useStyles from './styles';
 
-const Post = () => {
+const Post = ({ post }) => {
     const classes = useStyles();
-
+    console.log(post[0][0].creator)
     return (
         <Paper className={classes.paper}>
             <Card className={classes.card}>
