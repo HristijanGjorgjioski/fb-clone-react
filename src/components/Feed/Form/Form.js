@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import FileBase from 'react-file-base64';
-import { useHistory } from 'react-router-dom';
 import { Paper, TextField, Typography, Button } from '@material-ui/core';
 import { MainContext } from '../../../context/context';
 
@@ -8,10 +7,10 @@ import useStyles from './styles';
 
 const Form = () => {
     const classes = useStyles()
+    const user = JSON.parse(localStorage.getItem('user'));
     const [postData, setPostData] = useState({ description: '', selectedFile: '' });
     const { createPost } = useContext(MainContext);
-    const history = useHistory();
-    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user?.data?.result?.name)
 
     const clear = () => {
         setPostData({ description: '', selectedFile: '' })
@@ -19,9 +18,13 @@ const Form = () => {
 
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        createPost({ ...postData, creator: user?.data?.result?.name }, history);
+        createPost({ ...postData, name: user?.data?.result?.name, creator: user?.data?.result?._id });
         clear();
     }
+
+    useEffect(() => {
+        setPostData({ description: '', selectedFile: '' })
+    }, [createPost]);
 
     return (
         <Paper className={classes.paper}>

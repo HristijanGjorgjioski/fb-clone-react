@@ -44,10 +44,13 @@ export const Provider = ({ children }) => {
         }
     };
 
-    const createPost = async (post, router) => {
-        const createdPost = await api.createPost(post);
-        router.push("/");
-        dispatchPost({ type: 'CREATE_POST', createdPost });
+    const createPost = async (post) => {
+        try {
+            const createdPost = await api.createPost(post);
+            dispatchPost({ type: 'CREATE_POST', createdPost });   
+        } catch (error) {
+            console.log(error);
+        }
     };
     // END POSTS
 
@@ -58,6 +61,7 @@ export const Provider = ({ children }) => {
             loginUser,
             logout,
             getPosts,
+            posts,
             postsState,
             createPost
         }}>

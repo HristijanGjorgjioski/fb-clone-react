@@ -12,15 +12,13 @@ const Posts = ({ setCurrentId }) => {
     }, []);
 
     return (
-            !postsState.length ? <CircularProgress /> : (
                 <div>
-                    {postsState.map((post) => (
-                        <div key={post._id}>
-                            <Post key={post._id} post={postsState} setCurrentId={setCurrentId} />
+                    {postsState.map((post, index) => (
+                        <div key={index}>
+                            <Post post={post} setCurrentId={setCurrentId} />
                         </div>
                     ))}
                 </div>
-            )
     )
 }
 

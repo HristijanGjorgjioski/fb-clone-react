@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Card, CardMedia, Paper, Typography } from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -10,6 +10,7 @@ import useStyles from './styles';
 const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
     const user = JSON.parse(localStorage.getItem('user'));
+    console.log(post);
 
     const Likes = () => {
         if (post.likes.length > 0) {
@@ -26,14 +27,16 @@ const Post = ({ post, setCurrentId }) => {
     
 
     return (
-        post ? post[0].map((p) => (
-            <Paper key={p._id} className={classes.paper}>
-                <Card className={classes.card}>
-                    <Typography variant="h6" color="textSecondary">{p.creator}</Typography>
-                    <CardMedia className={classes.image} component="img" image={p.photo} title={'Image'} />
-                    <Typography variant="h6">{p.description}</Typography>
-                </Card>
-            </Paper>
+        post ? post.map((p) => (
+            <div key={p._id}>
+                <Paper className={classes.paper}>
+                    <Card className={classes.card}>
+                        <Typography variant="h6" color="textSecondary">{p.name}</Typography>
+                        <CardMedia className={classes.image} component="img" image={p.photo} title={'Image'} />
+                        <Typography variant="h6">{p.description}</Typography>
+                    </Card>
+                </Paper>
+            </div>
         )) : null
     )
 }
