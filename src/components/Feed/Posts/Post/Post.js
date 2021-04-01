@@ -9,9 +9,10 @@ import useStyles from './styles';
 const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
     const user = JSON.parse(localStorage.getItem('user'));
-    const deletePost = useContext(MainContext);
+    const { deletePost } = useContext(MainContext);
 
     const onButtonDelete = (id) => {
+        console.log(id);
         deletePost(id);
     }
 
@@ -27,8 +28,8 @@ const Post = ({ post, setCurrentId }) => {
                         </CardContent>
                         {(user?.data?.result._id === p.creator) && (
                             <CardActions>
-                                <Button size="small" color="primary" onClick={() => onButtonDelete(p._id)}><MoreHorizIcon /></Button>
-                                <Button size="small" color="secondary"><DeleteIcon /></Button>
+                                <Button size="small" color="primary"><MoreHorizIcon /></Button>
+                                <Button size="small" color="secondary" onClick={() => onButtonDelete(p._id)}><DeleteIcon /></Button>
                             </CardActions>
                         )}
                     </Card>

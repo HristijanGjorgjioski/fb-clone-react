@@ -56,7 +56,8 @@ export const Provider = ({ children }) => {
     const deletePost = async (id) => {
         try {
             await api.deletePost(id);
-            dispatchPost({ type: 'DELETE_POST', payload: id })
+            dispatchPost({ type: 'DELETE_POST', payload: id });
+            console.log(id, '  -- idddd')
         } catch (error) {
             console.log(error);
         }
