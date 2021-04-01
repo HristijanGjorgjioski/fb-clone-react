@@ -10,7 +10,6 @@ const Form = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const [postData, setPostData] = useState({ description: '', selectedFile: '' });
     const { createPost } = useContext(MainContext);
-    console.log(user?.data?.result?.name)
 
     const clear = () => {
         setPostData({ description: '', selectedFile: '' })
