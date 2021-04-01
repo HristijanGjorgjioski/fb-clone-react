@@ -25,6 +25,16 @@ const Form = () => {
         setPostData({ description: '', selectedFile: '' })
     }, [createPost]);
 
+    if(!user?.data?.result?.name) {
+        return (
+            <Paper className={classes.paper}>
+                <div className={classes.form}>
+                    <Typography variant="h6">To Create Your Own Posts Please Login or Signup!</Typography>
+                </div>
+            </Paper>
+        )
+    }
+
     return (
         <Paper className={classes.paper}>
             <form className={classes.form} autoComplete="off" noValidate onSubmit={onFormSubmit}>

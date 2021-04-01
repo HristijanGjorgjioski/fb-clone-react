@@ -52,6 +52,15 @@ export const Provider = ({ children }) => {
             console.log(error);
         }
     };
+
+    const deletePost = async (id) => {
+        try {
+            await api.deletePost(id);
+            dispatchPost({ type: 'DELETE_POST', payload: id })
+        } catch (error) {
+            console.log(error);
+        }
+    }
     // END POSTS
 
     return (
@@ -63,7 +72,8 @@ export const Provider = ({ children }) => {
             getPosts,
             posts,
             postsState,
-            createPost
+            createPost,
+            deletePost
         }}>
             {children}
         </MainContext.Provider>

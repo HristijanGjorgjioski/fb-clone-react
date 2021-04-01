@@ -6,6 +6,8 @@ const postContext = async (state, action) => {
         case 'CREATE_POST':
             posts =  [action.payload, { ...state }];
             return posts;
+        case 'DELETE_POST':
+            return posts.filter((post) => post._id !== action.payload)
         default:
             return state;
     }

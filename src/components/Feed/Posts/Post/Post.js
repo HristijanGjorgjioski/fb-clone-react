@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Button, Card, CardActions, CardContent, CardMedia, Paper, Typography } from '@material-ui/core';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 
+import { MainContext } from '../../../../context/context';
 import useStyles from './styles';
 
 const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
     const user = JSON.parse(localStorage.getItem('user'));
+    const deletePost = useContext(MainContext);
+
+    const onButtonDelete = (id) => {
+        deletePost(id);
+    }
 
     return (
         post ? post.map((p) => (
@@ -23,7 +27,7 @@ const Post = ({ post, setCurrentId }) => {
                         </CardContent>
                         {(user?.data?.result._id === p.creator) && (
                             <CardActions>
-                                <Button size="small" color="primary"><MoreHorizIcon /></Button>
+                                <Button size="small" color="primary" onClick={() => onButtonDelete(p._id)}><MoreHorizIcon /></Button>
                                 <Button size="small" color="secondary"><DeleteIcon /></Button>
                             </CardActions>
                         )}
