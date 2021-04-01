@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Button, Card, CardActions, CardContent, CardMedia, Paper, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import moment from 'moment';
 
 import { MainContext } from '../../../../context/context';
 import useStyles from './styles';
@@ -12,7 +13,6 @@ const Post = ({ post, setCurrentId }) => {
     const { deletePost } = useContext(MainContext);
 
     const onButtonDelete = (id) => {
-        console.log(id);
         deletePost(id);
     }
 
@@ -21,7 +21,8 @@ const Post = ({ post, setCurrentId }) => {
             <div key={p._id}>
                 <Paper className={classes.paper}>
                     <Card className={classes.card}>
-                        <Typography variant="h6" color="textSecondary">{p.name}</Typography>
+                        <Typography variant="h6" color="textPrimary">{p.name}</Typography>
+                        <Typography variant="p" component="p" color="textSecondary">{moment(p.createdNow).fromNow()}</Typography>
                         <CardMedia className={classes.image} component="img" image={p.photo || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={'Image'} />
                         <CardContent>
                             <Typography variant="h6">{p.description}</Typography>

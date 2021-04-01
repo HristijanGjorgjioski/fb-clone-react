@@ -6,7 +6,7 @@ const postContext = async (posts=[], action) => {
             posts =  [action.payload, { ...posts }];
             return posts;
         case 'DELETE_POST':
-            return posts.filter((post) => post._id !== action.payload);
+            console.log('Post deleted!')
         default:
             return posts;
     }
